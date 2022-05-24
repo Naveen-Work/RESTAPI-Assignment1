@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "6a0006ab-3c1c-421a-ae0f-93562d5dde9e",
+		"name": "Jira",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17562173"
+	},
+	"item": [
+		{
+			"name": "Assignment1",
+			"item": [
+				{
+					"name": "Total Count",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// let jsonData = pm.response.json();\r",
+									"\r",
+									"// var testmessage=jsonData._data[0].UserName //Dev_demo_82\r",
+									"// pm.test(testmessage, function () {\r",
+									"//    //testscript\r",
+									"\r",
+									"// });\r",
+									"\r",
+									"\r",
+									"//Print count and assertion\r",
+									"let response=pm.response.json();\r",
+									"\r",
+									"\r",
+									"console.log(\"total issues are\", response.total);\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "37lYGYVDMVQNU6pCFniW15A2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "testleafmay2022@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://testleafmay2022.atlassian.net/rest/api/2/search?jql=Project=MAY",
+							"protocol": "https",
+							"host": [
+								"testleafmay2022",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"search"
+							],
+							"query": [
+								{
+									"key": "jql",
+									"value": "Project=MAY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Createdinlast24hours",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// let jsonData = pm.response.json();\r",
+									"\r",
+									"// var testmessage=jsonData._data[0].UserName //Dev_demo_82\r",
+									"// pm.test(testmessage, function () {\r",
+									"//    //testscript\r",
+									"\r",
+									"// });\r",
+									"\r",
+									"\r",
+									"//Print count and assertion\r",
+									"let response=pm.response.json();\r",
+									"console.log(\"total issues in last 1 hours\", response.total);\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "37lYGYVDMVQNU6pCFniW15A2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "testleafmay2022@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://testleafmay2022.atlassian.net/rest/api/2/search?jql=Project=May and created >=-1h",
+							"protocol": "https",
+							"host": [
+								"testleafmay2022",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"search"
+							],
+							"query": [
+								{
+									"key": "created",
+									"value": ">=-1h",
+									"disabled": true
+								},
+								{
+									"key": "jql",
+									"value": "Project=May and created >=-1h"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "First&LastDesc",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// let jsonData = pm.response.json();\r",
+									"\r",
+									"// var testmessage=jsonData._data[0].UserName //Dev_demo_82\r",
+									"// pm.test(testmessage, function () {\r",
+									"//    //testscript\r",
+									"\r",
+									"// });\r",
+									"let response=pm.response.json();\r",
+									"var length=pm.response.json().issues.length;\r",
+									"console.log(\"total max result\", response.maxResults);\r",
+									"console.log(\"Test first bug description is\", response.issues[0].fields.description);\r",
+									"console.log(\"Test last bug description is\",response.issues[length-1].fields.description);\r",
+									"\r",
+									"//Print count and assertion\r",
+									"\r",
+									"// var testmessage=response.maxResults;\r",
+									"console.log(\"total max result\", response.maxResults);\r",
+									"console.log(\"Test first bug description is\", response.issues[0].fields.description);\r",
+									"console.log(\"Test last bug description is\",response.issues[response.maxResults-1].fields.description);\r",
+									"\r",
+									"\r",
+									"// console.log(\"first bug description is\", response.issues[0].fields.description);\r",
+									"// console.log(\"last bug description is\",response.issues[49].fields.description);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000 ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "37lYGYVDMVQNU6pCFniW15A2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "testleafmay2022@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://testleafmay2022.atlassian.net/rest/api/2/search?jql=Project=MAY&created=>=-24h",
+							"protocol": "https",
+							"host": [
+								"testleafmay2022",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"search"
+							],
+							"query": [
+								{
+									"key": "jql",
+									"value": "Project=MAY"
+								},
+								{
+									"key": "created",
+									"value": ">=-24h"
+								},
+								{
+									"key": "jql",
+									"value": "Project=May and created >=-1h",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assignment2",
+			"item": [
+				{
+					"name": "Create issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.globals.set(\"issueid\",pm.response.json().id);\r",
+									"\r",
+									"let test=pm.response.json().key;\r",
+									"var test2=test.substring(0,3);\r",
+									"\r",
+									"pm.test(\"May is present\", function () {\r",
+									"    pm.expect(test2.toLowerCase()).to.eqls((\"may\"));    \r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "37lYGYVDMVQNU6pCFniW15A2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "testleafmay2022@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": {\r\n        \"project\": {\r\n            \"key\": \"MAY\"\r\n        },\r\n        \"summary\": \"New create issue in RA project\",\r\n        \"description\": \"Creating of an issue using project keys and issue type names using the REST API\",\r\n        \"issuetype\": {\r\n            \"name\": \"Bug\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://testleafmay2022.atlassian.net/rest/api/2/issue",
+							"protocol": "https",
+							"host": [
+								"testleafmay2022",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"// pm.test(\"Blank response is displayed correctly\", function () {\r",
+									"//     pm.expect(pm.response.text()).eqls('');\r",
+									"//     console.log(\"response is null\",pm.response.text());\r",
+									"// });\r",
+									"\r",
+									"\r",
+									"pm.test(\"Blank response is displayed correctly\", function () {\r",
+									"    pm.response.to.have.body('');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "37lYGYVDMVQNU6pCFniW15A2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "testleafmay2022@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fields\": {\r\n        \"description\": \"Issue updated via RestAssured on May 24 2022 --second time\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://testleafmay2022.atlassian.net/rest/api/2/issue/{{issueid}}",
+							"protocol": "https",
+							"host": [
+								"testleafmay2022",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"{{issueid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Blank response is displayed correctly\", function () {\r",
+									"    pm.response.to.have.body('');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "37lYGYVDMVQNU6pCFniW15A2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "testleafmay2022@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://testleafmay2022.atlassian.net/rest/api/2/issue/{{issueid}}",
+							"protocol": "https",
+							"host": [
+								"testleafmay2022",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"{{issueid}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Issue",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"// pm.test(\"Issue is deleted from System\", function () {\r",
+									"//     pm.response.to.have.body('{\"errorMessages\":[\"Issue does not exist or you do not have permission to see it.\"],\"errors\":{}}');\r",
+									"// });\r",
+									"\r",
+									"pm.test(\"Issue is deleted from System\", function () {\r",
+									"    // console.log(pm.response.text());\r",
+									"    pm.expect(pm.response.text()).to.eql('{\"errorMessages\":[\"Issue does not exist or you do not have permission to see it.\"],\"errors\":{}}');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "37lYGYVDMVQNU6pCFniW15A2",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "testleafmay2022@gmail.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://testleafmay2022.atlassian.net/rest/api/2/issue/{{issueid}}",
+							"protocol": "https",
+							"host": [
+								"testleafmay2022",
+								"atlassian",
+								"net"
+							],
+							"path": [
+								"rest",
+								"api",
+								"2",
+								"issue",
+								"{{issueid}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "password",
+						"value": "37lYGYVDMVQNU6pCFniW15A2",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "testleafmay2022@gmail.com",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
